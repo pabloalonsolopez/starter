@@ -29,14 +29,14 @@ TodosRouter.get("/:id", function(request: Request, response: Response, next: Nex
 TodosRouter.put("/:id", function(request: Request, response: Response, next: NextFunction) {
   Todo.findByIdAndUpdate(request.params.id, request.body, { new: true }, function(err, todo) {
     if (err) return next(err)
-    response.json()
+    response.json({})
   })
 })
 
 TodosRouter.delete("/:id", function(request: Request, response: Response, next: NextFunction) {
   Todo.findByIdAndRemove(request.params.id, function(err, todo) {
     if (err) return next(err)
-    response.json()
+    response.json({})
   })
 })
 

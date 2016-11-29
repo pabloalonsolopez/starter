@@ -20,7 +20,7 @@ export class TodosService {
   }
   
   getTodo(id: string): Observable<Todo> {
-    return this.http.get(`${this.todosUrl}${id}`)
+    return this.http.get(`${this.todosUrl}/${id}`)
       .map(this.extractData)
       .catch(this.handleError)
   }
@@ -32,13 +32,13 @@ export class TodosService {
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
-    return this.http.put(`${this.todosUrl}${todo._id}`, JSON.stringify(todo), this.options)
+    return this.http.put(`${this.todosUrl}/${todo._id}`, JSON.stringify(todo), this.options)
       .map(this.extractData)
       .catch(this.handleError)
   }
 
   deleteTodo(todo: Todo): Observable<Todo> {
-    return this.http.delete(`${this.todosUrl}${todo._id}`)
+    return this.http.delete(`${this.todosUrl}/${todo._id}`)
       .map(this.extractData)
       .catch(this.handleError)
   }

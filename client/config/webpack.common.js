@@ -46,7 +46,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: ["app", "vendor", "polyfills"]
     }),
-    
+
     new ExtractTextPlugin("assets/styles/[name].[hash].css"),
 
     new FaviconsWebpackPlugin({

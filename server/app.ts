@@ -13,7 +13,7 @@ import "./models/todo"
 import { TodosRouter } from "./routes/todos"
 import { IndexRouter } from "./routes/index"
 
-mongoose.connect(process.env.DB_URL)
+mongoose.connect(process.env.DATABASE_URL)
 
 const app: express.Application = express()
 
@@ -24,12 +24,15 @@ app.use(logger("dev"))
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }))
 
-app.use(express.static(path.join(__dirname, "../client")))
-
-app.use(favicon(path.join(__dirname, "../client/assets/images/favicons", "favicon.ico")))
-
 app.use("/api/todos", TodosRouter)
-app.use("*", IndexRouter)
+
+if (app.get("env") === "production") {
+  app.use(express.static(path.join(__dirname, "../client")))
+
+  app.use(favicon(path.join(__dirname, "../client/assets/images/favicons", "favicon.ico")))
+  
+  app.use("*", IndexRouter)
+}
 
 if (app.get("env") === "development") {
   app.use(function(error: any, request: express.Request, response: express.Response, next: express.NextFunction) {

@@ -1,0 +1,7 @@
+<h3>Todo Detail</h3>
+<a routerLink="/todos">Back</a>
+<button (click)="delete()">Delete</button>
+<div *ngIf="todo">
+  <p><b>Id:</b> {{todo._id}}</p>
+  <p><b>Name:</b> {{todo.name}}</p>
+</div>

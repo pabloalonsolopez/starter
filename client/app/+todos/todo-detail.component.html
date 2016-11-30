@@ -1,8 +1,8 @@
 <h3>Todo Detail</h3>
 <a routerLink="/todos">Back</a>
-<a routerLink="edit">Edit</a>
 <button (click)="delete()">Delete</button>
 <div *ngIf="todo">
   <p><b>Id:</b> {{todo._id}}</p>
   <p><b>Name:</b> {{todo.name}}</p>
+  <st-todo-edit [todo]="todo" (onEdit)="refresh($event)"></st-todo-edit>
 </div>

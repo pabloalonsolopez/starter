@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core"
-import { ActivatedRoute, Router, Params } from '@angular/router'
+import { Component, Input, Output, EventEmitter } from "@angular/core"
+import { Router } from '@angular/router'
 
 import { Todo } from "./todo.model"
 import { TodosService } from "./todos.service"
@@ -9,29 +9,19 @@ import { TodosService } from "./todos.service"
   templateUrl: "./todo-edit.component.html"
 })
 
-export class TodoEditComponent implements OnInit {
+export class TodoEditComponent {
   
-  todo: Todo
+  @Input() todo: Todo
+  @Output() onEdit: EventEmitter<Todo> = new EventEmitter<Todo>()
   error: any
   
-  constructor(private route: ActivatedRoute, private router: Router, private todosService: TodosService) { }
-
-  ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      let id = params['id']
-      this.todosService.getTodo(id)
-        .subscribe(
-          todo => this.todo = todo,
-          error => this.error = error
-        )
-    })
-  }
+  constructor(private router: Router, private todosService: TodosService) { }
 
   updateTodo(todo: Todo): void {
     this.todo = todo
     this.todosService.updateTodo(this.todo)
   	  .subscribe(
-        () => this.router.navigate(['/todos', todo._id]),
+        () => this.onEdit.emit(this.todo),
         error => this.error = error
   	  )
   }

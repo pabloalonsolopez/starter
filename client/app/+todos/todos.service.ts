@@ -7,44 +7,40 @@ import { Todo } from "./todo.model"
 
 @Injectable()
 export class TodosService {
-  
+
   private todosUrl = "api/todos"
   private options = new RequestOptions({ headers: new Headers({ "Content-Type": "application/json" }) })
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getTodos(): Observable<Todo[]> {
     return this.http.get(this.todosUrl)
-      .map(this.extractData)
+      .map(response => response.json())
       .catch(this.handleError)
   }
   
   getTodo(id: string): Observable<Todo> {
     return this.http.get(`${this.todosUrl}/${id}`)
-      .map(this.extractData)
+      .map(response => response.json())
       .catch(this.handleError)
   }
 
   createTodo(todo: Todo): Observable<Todo> {
     return this.http.post(this.todosUrl, JSON.stringify(todo), this.options)
-      .map(this.extractData)
+      .map(response => response.json())
       .catch(this.handleError)
   }
 
   updateTodo(todo: Todo): Observable<Todo> {
     return this.http.put(`${this.todosUrl}/${todo._id}`, JSON.stringify(todo), this.options)
-      .map(this.extractData)
+      .map(response => todo)
       .catch(this.handleError)
   }
 
   deleteTodo(todo: Todo): Observable<Todo> {
     return this.http.delete(`${this.todosUrl}/${todo._id}`)
-      .map(this.extractData)
+      .map(response => todo)
       .catch(this.handleError)
-  }
-
-  private extractData(response: Response): Observable<any> {
-    return response.json() || {}
   }
 
   private handleError(error: any): Observable<any> {

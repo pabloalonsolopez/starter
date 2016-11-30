@@ -1,3 +1,4 @@
-<h3>Todo Edit</h3>
-<a routerLink="/todos/{{todo._id}}">Back</a>
-<st-todo-form [todo]="todo" (onSubmit)="updateTodo($event)"></st-todo-form>
+<h4>Todo Edit</h4>
+<div *ngIf="todo">
+  <st-todo-form [todo]="todo" (onSubmit)="updateTodo($event)"></st-todo-form>
+</div>

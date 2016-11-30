@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { FormGroup, FormBuilder } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 import { Todo } from './todo.model'
 
@@ -32,7 +32,8 @@ export class TodoFormComponent implements OnInit {
 
   buildForm(): void {
     this.todoForm = this.formBuilder.group({
-      'name': [this.todo.name]
+      '_id': [this.todo._id],
+      'name': [this.todo.name, Validators.required]
     })
     this.todoForm.valueChanges.subscribe(
       data => this.onValueChanged(data)

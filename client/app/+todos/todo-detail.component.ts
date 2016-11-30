@@ -34,5 +34,9 @@ export class TodoDetailComponent implements OnInit {
         error => this.error = error
       )
   }
+
+  refresh(todo: Todo): void {
+    this.todo = todo
+  }
   
 }

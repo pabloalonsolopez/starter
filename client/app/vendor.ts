@@ -9,3 +9,8 @@ import "@angular/router"
 
 // RxJS
 import "rxjs"
+
+// NgRx
+import "@ngrx/core"
+import "@ngrx/store"
+import "@ngrx/effects"

@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core"
 
+import { Observable } from "rxjs/Observable"
+import { Store } from "@ngrx/store"
+
 import { Todo } from "./todo.model"
 import { TodosService } from "./todos.service"
+import { TodoActions } from "./actions/todo.actions"
 
 @Component({
   selector: "st-todos-list",
@@ -10,17 +14,15 @@ import { TodosService } from "./todos.service"
 
 export class TodosListComponent implements OnInit {
 
-  todos: Todo[]
+  todos: Observable<Todo[]>
   error: any
 
-  constructor(private todosService: TodosService) { }
+  constructor(private store: Store<any>, private todoActions: TodoActions, private todosService: TodosService) {
+    this.todos = store.select('todos')
+  }
 
   ngOnInit(): void {
-    this.todosService.getTodos()
-      .subscribe(
-        todos => this.todos = todos,
-        error => this.error = error
-      )
+    this.store.dispatch(this.todoActions.getTodos())
   }
 
 }

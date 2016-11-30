@@ -23,10 +23,6 @@ const routes: Routes = [
       {
         path: ":id",
         component: TodoDetailComponent
-      },
-      {
-        path: ":id/edit",
-        component: TodoEditComponent
       }
     ]
   }

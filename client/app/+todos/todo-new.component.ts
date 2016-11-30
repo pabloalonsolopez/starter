@@ -22,6 +22,7 @@ export class TodoNewComponent {
 
   createTodo(todo: Todo): void {
     this.todo = todo
+    delete this.todo._id
     this.todosService.createTodo(this.todo)
   	  .subscribe(
         todo => this.router.navigate(['/todos', todo._id]),

@@ -1,5 +1,5 @@
 <h4>Todo Form</h4>
-<form [formGroup]="todoForm" (ngSubmit)="submit()">
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit.emit(todoForm.value)">
   <label for="name"></label>
   <input type="text" id="name" placeholder="Name" formControlName="name"/>
   <input type="submit" value="Submit"/>

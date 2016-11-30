@@ -5,6 +5,7 @@ import { TodosComponent } from "./todos.component"
 import { TodosListComponent } from "./todos-list.component"
 import { TodoNewComponent } from "./todo-new.component"
 import { TodoDetailComponent } from "./todo-detail.component"
+import { TodoEditComponent } from "./todo-edit.component"
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: ":id",
         component: TodoDetailComponent
+      },
+      {
+        path: ":id/edit",
+        component: TodoEditComponent
       }
     ]
   }

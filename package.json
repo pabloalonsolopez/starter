@@ -6,7 +6,7 @@
     "clean": "rimraf data node_modules dist",
     "clean:dist": "rimraf dist",
     "client:dev": "webpack-dev-server --config client/config/webpack.development.js --progress --profile --inline",
-    "server:dev": "concurrently \"tsc -p server\" \"cpr server/config/.env.development dist/server/config/.env --overwrite\" && concurrently \"tsc -p -w server\" \"nodemon dist/server/bin/www.js --watch server --ext ts\"",
+    "server:dev": "concurrently \"tsc -p server\" \"cpr server/config/.env.development dist/server/config/.env --overwrite\" && concurrently \"tsc -p server -w\" \"nodemon dist/server/bin/www.js --watch server --ext ts\"",
     "client:prod": "webpack --config client/config/webpack.production.js  --progress --profile --bail",
     "build:server:prod": "concurrently \"tsc -p server\" \"cpr server/config/.env.production dist/server/config/.env --overwrite\"",
     "start:server:prod": "node dist/server/bin/www.js",

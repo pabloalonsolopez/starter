@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { FormGroup, FormBuilder } from '@angular/forms'
-import { Router } from '@angular/router'
 
 import { Todo } from './todo.model'
-import { TodosService } from './todos.service'
 
 @Component({
   selector: 'st-todo-form',
@@ -12,8 +10,10 @@ import { TodosService } from './todos.service'
 
 export class TodoFormComponent implements OnInit {
   
+  @Input() todo: Todo
+  @Output() onSubmit: EventEmitter<Todo> = new EventEmitter<Todo>()
+
   todoForm: FormGroup
-  todo: Todo
   error: any
   formErrors: any = {
     'name': ''
@@ -24,7 +24,7 @@ export class TodoFormComponent implements OnInit {
     }
   }
   
-  constructor(private formBuilder: FormBuilder, private router: Router, private todosService: TodosService) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.buildForm()
@@ -32,19 +32,11 @@ export class TodoFormComponent implements OnInit {
 
   buildForm(): void {
     this.todoForm = this.formBuilder.group({
-      'name': ['']
+      'name': [this.todo.name]
     })
     this.todoForm.valueChanges.subscribe(
       data => this.onValueChanged(data)
     )
-  }
-
-  submit(): void {
-    this.todosService.createTodo(this.todoForm.value)
-  	  .subscribe(
-        todo => this.router.navigate(['/todos', todo._id]),
-        error => this.error = error
-  	  )
   }
 
   onValueChanged(data?: any): void {

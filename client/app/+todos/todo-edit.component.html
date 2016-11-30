@@ -1,0 +1,3 @@
+<h3>Todo Edit</h3>
+<a routerLink="/todos/{{todo._id}}">Back</a>
+<st-todo-form [todo]="todo" (onSubmit)="updateTodo($event)"></st-todo-form>
